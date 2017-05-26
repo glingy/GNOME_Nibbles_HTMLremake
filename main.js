@@ -42,6 +42,7 @@ function start() {
   item.createItemAtInterval("i", 10000);
   item.createItemAtInterval("d", 10000);
   item.createItemAtInterval("o", -1);
+  document.getElementsByTagName("button")[0].disabled = true;
 }
 
 function gameOver(c) {
@@ -49,6 +50,7 @@ function gameOver(c) {
   console.log("COLOR " + c + " WON!");
   keybinder.bindings[13] = start;
   item.createItem = false;
+  document.getElementsByTagName("button")[0].disabled = false;
 }
 
 var items = [];
