@@ -44,8 +44,7 @@ function worm(x,y,d,c,i) {
     if (!tile.testTile(this.parts[0],["bk"])) {
       if (tile.testTile(this.parts[0],"worm")) {
         clearInterval(this.interval);
-        console.log(this.parts);
-        //this.die();
+        this.die();
         return;
       } else if (tile.testTile(this.parts[0],"wall")) {
         clearInterval(this.interval);
