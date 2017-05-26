@@ -1,0 +1,145 @@
+body {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  font-family: helvetica;
+}
+
+#gameDiv {
+  padding: 0px;
+  margin: 0px;
+  width: 1280px;
+  zoom: 0.5;
+}
+
+.tile {
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  width: 16px;
+  height: 16px;
+  background: url("tileSheet.png") -64px -64px;
+}
+
+.r90 {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.r180 {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.r270 {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+#keyholder {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#keybinds {
+    position: relative;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-around;
+		align-items: space-around;
+		height: 400px;//keyholder
+		width: 400px;
+	}
+	.keybinds {
+		position: relative;
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: center;
+		justify-content: center;
+		height: 50%;
+		width: 50%;
+		text-align: center;
+	}
+	.keybinds h2 {
+		margin: 0px;
+		margin-bottom: 10px;
+    cursor: default;
+	}
+	.keybinds span {
+		background-color: rgba(255,255,255,0.4);
+		border-radius: 10px;
+		padding: 0px 5px;
+		margin: -5px;
+	}
+	.keybinds span:hover {
+		background-color: rgba(255,255,255,0.6);
+		cursor: pointer;
+	}
+	.keybinds p {
+		margin: -5px;
+	}
+	#rSnake {
+		background-color: #FF0000;
+	}
+	#gSnake {
+		background-color: #00FF00;
+	}
+	#ySnake {
+		background-color: #FFFF00;
+	}
+	#bSnake {
+		background-color: #0000FF;
+	}
+	.disabled .disabler {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		left: 0px;
+		top: 0px;
+		background-color: rgba(0,0,0,0.6);
+		z-index: 1;
+	}
+  .keybinds:not(.disabled) .disabler {
+    position: absolute;
+		height: 0px;
+		width: 0px;
+		left: 0px;
+		top: 0px;
+		background-color: rgba(0,0,0,0.6);
+  }
+#keybinds img {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 10;
+  border-bottom-left-radius: 15px;
+  background-color: #00FF00;
+  transition: background-color 0.5s;
+}
+#keybinds img:hover {
+  background-color: #00A000;
+}
+#controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 640px;
+}
+#controls button {
+  width: 50%;
+}
