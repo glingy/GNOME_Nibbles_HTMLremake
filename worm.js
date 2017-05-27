@@ -20,11 +20,13 @@ function worm(x,y,d,c,i) {
       }
   };
   this.shrink = function(n) {
-    if (n == 1) {
+    if (n == 1 && this.parts.length > 1) {
       tile.setTile(this.parts.pop(),"bk");
     } else {
       for (var i = 0; i < n; i++) {
-        tile.setTile(this.parts.pop(),"bk");
+        if (this.parts.length > 1) {
+          tile.setTile(this.parts.pop(),"bk");
+        }
       }
     }
   };
@@ -83,7 +85,6 @@ function worm(x,y,d,c,i) {
     this.parts.reverse();
     this.direction = newdir;
     console.log(this.parts);
-    tile.setTile(this.parts[0],"bk");
   };
   this.setDir = function(dir) {
     console.log(this.dirChanged);
