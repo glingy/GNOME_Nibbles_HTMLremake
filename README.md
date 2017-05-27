@@ -1,1 +1,1 @@
-GNOME_Nibbles_HTMLremake
+This is an html remake of https://github.com/GNOME/gnome-nibbles originally released under the GPLv3 as found in COPYING in that repository and also as in LICENSE in this repository. Have fun playing! If you make a level, feel free to submit a pull request. They are found in loadLevel.js as the level Array about halfway down. It should alternate number(s) and one character to be a valid level. The levelLoader.saveLevel function will return a valid string to add to the array.
