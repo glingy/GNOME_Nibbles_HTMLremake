@@ -7,23 +7,14 @@ var ROT = 2;
 
 function setup() {
   document.body.removeChild(document.body.children[0]);
-  var gameDiv = document.createElement("div");
-  gameDiv.id = "gameDiv";
-  var curEl = null;
   var curAr = [];
   for (var y = 0; y < gameHeight; y++) {
     for (var x = 0; x < gameWidth; x++) {
-      curEl = document.createElement("div");
-      curEl.className = "tile";
-      curEl.id = "tile" + x + "," + y;
-      gameDiv.appendChild(curEl);
-      curAr.push([curEl.id, "bk", 0]);
+      curAr.push(["tile" + x + "," + y, "bk", 0]);
     }
-    gameDiv.appendChild(document.createElement("br"));
     tileArray.push(curAr);
     curAr = [];
   }
-  document.body.appendChild(gameDiv);
   document.body.onkeydown = function(e) {keybinder.onkeydown(e);};
   levelLoader.loadLevel(level[0]);
 }
