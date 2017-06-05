@@ -59,7 +59,7 @@ body {
 		flex-flow: row wrap;
 		justify-content: space-around;
 		align-items: space-around;
-		height: 400px;//keyholder
+		height: 400px;
 		width: 400px;
 	}
 	.keybinds {

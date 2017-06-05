@@ -1,7 +1,9 @@
 function levelLoader() {
   this.curLevel = 0;
+  this.levelHash = 0;
   this.worms = [{x: 20, y: 20, d: 3}, {x: 60, y: 20, d: 3}, {x: 20, y: 60, d: 1}, {x: 60, y: 60, d: 1}];
   this.loadLevel = function (lvl) {
+    this.levelHash = Math.floor(Math.random()*10000000000);
     var lvla = lvl.split(/([0-9]+)/);
     console.log(lvla);
     lvla.shift();
@@ -23,6 +25,7 @@ function levelLoader() {
         }
       }
     }
+
   };
   this.saveLevel = function () {
     var lvl = [];

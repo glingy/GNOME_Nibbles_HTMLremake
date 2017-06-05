@@ -36,11 +36,8 @@ function keybinder() {
         e.preventDefault();
       }
       this.worms[this.getCharFor[0]].setChar(this.getCharFor[1], key);
-      key = e.key;
-      if (key.indexOf("Arrow") != -1) {
-        key = key.split(/Arrow/)[1] + " Arrow";
-      }
-      this.getCharFor[2].innerHTML = this.getCharFor[2].innerHTML.replace(/:.*/, ": " + key);
+      console.log(e);
+      this.getCharFor[2].innerHTML = this.getCharFor[2].innerHTML.replace(/:.*/, ": " + e.keyIdentifier);
       this.getCharFor = null;
       return;
     } else {

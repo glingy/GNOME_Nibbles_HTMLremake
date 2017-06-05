@@ -1,7 +1,12 @@
 function item() {
   this.createItem = 1; //can I create an item?
   this.oCount = 0;
-  this.createItemAtInterval = function(item, int) {
+  this.timeouts = [];
+  this.createItemAtInterval = function(item, int, hash) {
+    if (hash !== levelLoader.levelHash) {
+      return;
+    }
+
     if (int == -1) {
       if (this.oCount++ > 10) {
         console.log("Next Level!");
@@ -41,8 +46,8 @@ function item() {
           break;
         }
       }
-      if (int != -1) {this.createItemAtInterval(item,int)};
-    }.bind(this,item,int), Math.floor(Math.random()*2000 + int));
+      if (int != -1) {this.createItemAtInterval(item,int,hash)};
+    }.bind(this,item,int,hash), Math.floor(Math.random()*2000 + int));
   };
   this.delete = function(pos) {
     var x = pos[0];

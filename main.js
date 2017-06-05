@@ -38,10 +38,10 @@ function start() {
   activeWorms.map(function (w) {w.registerKeyBindsAndUpdateLoop(1);});
   keybinder.bindings[13] = undefined;
   item.createItem = true;
-  item.createItemAtInterval("c", 10000);
-  item.createItemAtInterval("i", 10000);
-  item.createItemAtInterval("d", 10000);
-  item.createItemAtInterval("o", -1);
+  item.createItemAtInterval("c", 10000, levelLoader.levelHash);
+  item.createItemAtInterval("i", 10000, levelLoader.levelHash);
+  item.createItemAtInterval("d", 10000, levelLoader.levelHash);
+  item.createItemAtInterval("o", -1, levelLoader.levelHash);
   document.getElementsByTagName("button")[0].disabled = true;
 }
 

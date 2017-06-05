@@ -19,12 +19,12 @@ function worm(x,y,d,c,i) {
         this.growing--;
       }
   };
-  this.shrink = function(n) {
-    if (n == 1 && this.parts.length > 1) {
+  this.shrink = function(n,t) {
+    if (n == 1 && (this.parts.length > 1 || t)) {
       tile.setTile(this.parts.pop(),"bk");
     } else {
       for (var i = 0; i < n; i++) {
-        if (this.parts.length > 1) {
+        if (this.parts.length > 1 || t) {
           tile.setTile(this.parts.pop(),"bk");
         }
       }
@@ -56,19 +56,23 @@ function worm(x,y,d,c,i) {
         var itemm = item.delete(this.parts[0]);
         if (itemm == "o") {
           this.growing = 4;
-          item.createItemAtInterval("o", -1);
+          item.createItemAtInterval("o", -1, levelLoader.levelHash);
         } else if (itemm == "i") {
           this.growing = 10;
         } else if (itemm == "c") {
           this.shrink(this.parts.length > 3? 3 : this.parts.length - 2);
         } else if (itemm == "d") {
-          activeWorms.map(function(w) {w.swapHeads(); return w;})
+          for (w of activeWorms) {
+            if (w.color != this.color) {
+              w.swapHeads(this.color);
+            }
+          }
         }
       }
     }
     tile.setTile(this.parts[0],"w" + c);
   };
-  this.swapHeads = function() {
+  this.swapHeads = function(c) {
     console.log(this.parts);
     var newdir = 0;
     var lastPoint = this.parts[this.parts.length-1];
@@ -113,7 +117,7 @@ function worm(x,y,d,c,i) {
     this.deathCount++;
     this.parts.shift();
     this.registerKeyBindsAndUpdateLoop(0);
-    this.shrink(this.parts.length);
+    this.shrink(this.parts.length, 1);
     this.parts.push([this.spawnPoint[0],this.spawnPoint[1]]);
     this.growing = 5;
     this.direction = this.spawnPoint[2];
