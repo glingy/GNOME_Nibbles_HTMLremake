@@ -21,16 +21,9 @@ function tile() {
     if (r == -90) {r = 270;}
     r = r || 0;
     r *= Math.PI/180;
-    console.log(x);
-    console.log(y);
-    console.log(t);
-    console.log(r);
     tileArray[y][x][ROT] = r;
     tileArray[y][x][TILE] = t;
     t = tiles[t];
-    console.log(t);
-    console.log(this.tileSheet);
-
     if (r !== 0) {
       this.ctx.save();
       this.ctx.translate(x*16 + 8, y*16 + 8);

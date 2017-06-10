@@ -18,6 +18,7 @@ function keybinder() {
       }
     };
   }
+  this.updateSpeed = 50;
   this.getCharFor = null;
   this.bindings = {
     13: start
@@ -37,22 +38,31 @@ function keybinder() {
       }
       this.worms[this.getCharFor[0]].setChar(this.getCharFor[1], key);
       console.log(e);
-      this.getCharFor[2].innerHTML = this.getCharFor[2].innerHTML.replace(/:.*/, ": " + e.keyIdentifier);
+      console.log(e.charCode);
+      this.getCharFor[2].innerHTML = this.getCharFor[2].innerHTML.replace(/:.*/, ": " + this.stringFromID(key));
       this.getCharFor = null;
       return;
     } else {
       (this.bindings[e.which] || function() {})();
     }
   };
-  this.displayKeybinds = function() {
-    if (!document.getElementById("keyholder")) {
-      var maindiv = document.createElement("div");
-      maindiv.id = "keyholder";
-      maindiv.innerHTML = "<div id=\"keybinds\"><div class=\"keybinds\" id=\"rSnake\" onclick=\"keybinder.disable(event,1)\"><h2>Red Snake:</h2><span onclick=\"keybinder.setCharFor(event,1,1)\">Up: Up Arrow</span><br><span onclick=\"keybinder.setCharFor(event,1,2)\">Down: Down Arrow</span><br><span onclick=\"keybinder.setCharFor(event,1,3)\">Left: Left Arrow</span><br><span onclick=\"keybinder.setCharFor(event,1,4)\">Right: Right Arrow</span><br><div class=\"disabler\"></div></div><div  class=\"keybinds disabled\" id=\"gSnake\" onclick=\"keybinder.disable(event,2)\"><h2>Green Snake:</h2><span onclick=\"keybinder.setCharFor(event,2,1)\">Up: w</span><br><span onclick=\"keybinder.setCharFor(event,2,2)\">Down: s</span><br><span onclick=\"keybinder.setCharFor(event,2,3)\">Left: a</span><br><span onclick=\"keybinder.setCharFor(event,2,4)\">Right: d</span><br><div class=\"disabler\"></div></div><br><div class=\"keybinds disabled\" id=\"ySnake\"   onclick=\"keybinder.disable(event,3)\"><h2>Yellow Snake:</h2><span onclick=\"keybinder.setCharFor(event,3,1)\">Up: none</span><br><span onclick=\"keybinder.setCharFor(event,3,2)\">Down: none</span><br><span onclick=\"keybinder.setCharFor(event,3,3)\">Left: none</span><br><span onclick=\"keybinder.setCharFor(event,3,4)\">Right: none</span><br><div class=\"disabler\"></div></div><div class=\"keybinds disabled\" id=\"bSnake\" onclick=\"keybinder.disable(event,4)\"><h2>Blue Snake:</h2><span   onclick=\"keybinder.setCharFor(event,4,1)\">Up: none</span><br><span onclick=\"keybinder.setCharFor(event,4,2)\">Down: none</span><br><span onclick=\"keybinder.setCharFor(event,4,3)\">Left: none</span><br><span onclick=\"keybinder.setCharFor(event,4,4)\">Right: none</span><br><div class=\"disabler\"></div></div><img src=\"close.png\" onclick=\"keybinder.closeKeybinds()\"/></div>";
-      document.body.appendChild(maindiv);
-    } else {
-      document.getElementById("keyholder").style.display = "flex";
+  this.stringFromID = function(s) {
+    console.log(s);
+    var ret = String.fromCharCode(s);
+    console.log(ret);
+    console.log(ret.length);
+    if (ret.length > 1) {
+      ret = s;
     }
+    if (s === 0) {
+      ret = "None";
+    }
+    console.log(ret);
+    return ret;
+  };
+  this.displayKeybinds = function() {
+    this.getCookie();
+    document.getElementById("keyholder").style.display = "flex";
   };
   this.disable = function(e,n) {
     if (e.target.className == "disabler") {
@@ -76,6 +86,7 @@ function keybinder() {
   };
   this.closeKeybinds = function() {
     if (this.validKeys()) {
+      this.setCookie();
       document.getElementById("keyholder").style.display = "none";
     } else {
       alert("Duplicate or undefined keys found in enabled snakes.\nPlease disable the snake or fix the keybindings.");
@@ -124,6 +135,36 @@ function keybinder() {
     console.log(tmpKeysArray);
     return true;
   };
+  this.speedUpdate = function(e) {
+    var displaySpeed = (e.target.value.length == 1? "00" : e.target.value.length == 2? "0" : "") + e.target.value + "ms";
+    document.getElementById("curSpeed").innerHTML = displaySpeed;
+    console.log(e.target.value);
+    this.updateSpeed = e.target.value;
+  };
+  this.setCookie = function() {
+    var cookie = [];
+    for (var i = 0; i < 4; i++) {
+      cookie.push(this.worms[i].color, this.worms[i].enabled, this.worms[i].up, this.worms[i].down, this.worms[i].left, this.worms[i].right);
+    }
+    cookie.push(this.updateSpeed);
+    document.cookie = "cookie=" + cookie.join("!") + "; expires=Thu, 1 Jan 2111 00:00:00 UTC";
+  };
+  this.getCookie = function() {
+    if (!document.cookie) {return}
+    var cookie = document.cookie.split(";")[0].split("=")[1].split("!");
+    for (var i = 0; i < 4; i++) {
+      this.worms[i] = new wormKeys(cookie.shift(),cookie.shift() == "true"? true : false,Number(cookie.shift()),Number(cookie.shift()),Number(cookie.shift()),Number(cookie.shift()));
+      console.log(this.worms[i]);
+      document.getElementById(this.worms[i].color + "Snake").className = this.worms[i].enabled ? "keybinds" : "keybinds disabled";
+      document.getElementById("keybindss").children[i].children[1].innerHTML = "Up: " + this.stringFromID(this.worms[i].up);
+      document.getElementById("keybindss").children[i].children[3].innerHTML = "Down: " + this.stringFromID(this.worms[i].down);
+      document.getElementById("keybindss").children[i].children[5].innerHTML = "Left: " + this.stringFromID(this.worms[i].left);
+      document.getElementById("keybindss").children[i].children[7].innerHTML = "Right: " + this.stringFromID(this.worms[i].right);
+    }
+    this.updateSpeed = Number(cookie.shift());
+    document.getElementById("speed").children[1].value = this.updateSpeed;
+    document.getElementById("curSpeed").innerHTML = (this.updateSpeed.length == 1? "00" : this.updateSpeed.length == 2? "0" : "") + this.updateSpeed + "ms";
+  }
 }
 
 var keybinder = new keybinder();

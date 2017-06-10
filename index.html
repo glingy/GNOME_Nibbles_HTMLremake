@@ -14,6 +14,55 @@
     <div id="gameDiv">
       <canvas id="canvas"></canvas>
     </div>
+    <div id="keyholder" style="display: none">
+      <div id="keybinds">
+        <div id="keybindss">
+          <div class="keybinds" id="rSnake" onclick="keybinder.disable(event,1)">
+          <h2>Red Snake:</h2>
+        <span onclick="keybinder.setCharFor(event,1,1)">Up: Up Arrow</span><br>
+        <span onclick="keybinder.setCharFor(event,1,2)">Down: Down Arrow</span><br>
+        <span onclick="keybinder.setCharFor(event,1,3)">Left: Left Arrow</span><br>
+        <span onclick="keybinder.setCharFor(event,1,4)">Right: Right Arrow</span><br>
+        <div class="disabler">
+          </div>
+        </div>
+        <div  class="keybinds disabled" id="gSnake" onclick="keybinder.disable(event,2)">
+          <h2>Green Snake:</h2>
+        <span onclick="keybinder.setCharFor(event,2,1)">Up: w</span><br>
+        <span onclick="keybinder.setCharFor(event,2,2)">Down: s</span><br>
+        <span onclick="keybinder.setCharFor(event,2,3)">Left: a</span><br>
+        <span onclick="keybinder.setCharFor(event,2,4)">Right: d</span><br>
+        <div class="disabler">
+          </div>
+        </div>
+        <div class="keybinds disabled" id="ySnake"   onclick="keybinder.disable(event,3)">
+          <h2>Yellow Snake:</h2>
+        <span onclick="keybinder.setCharFor(event,3,1)">Up: none</span><br>
+        <span onclick="keybinder.setCharFor(event,3,2)">Down: none</span><br>
+        <span onclick="keybinder.setCharFor(event,3,3)">Left: none</span><br>
+        <span onclick="keybinder.setCharFor(event,3,4)">Right: none</span><br>
+        <div class="disabler">
+          </div>
+        </div>
+        <div class="keybinds disabled" id="bSnake" onclick="keybinder.disable(event,4)">
+          <h2>Blue Snake:</h2>
+        <span onclick="keybinder.setCharFor(event,4,1)">Up: none</span><br>
+        <span onclick="keybinder.setCharFor(event,4,2)">Down: none</span><br>
+        <span onclick="keybinder.setCharFor(event,4,3)">Left: none</span><br>
+        <span onclick="keybinder.setCharFor(event,4,4)">Right: none</span><br>
+        <div class="disabler">
+          </div>
+        </div>
+        <img src="close.png" onclick="keybinder.closeKeybinds()"/>
+        </div>
+        <div id="speed">
+          <span style="padding-left: 10px">Update Delay:</span>
+        <input type="range" min="0" max="100" onchange="keybinder.speedUpdate(event)">
+        </input>
+        <span id="curSpeed" style="padding-right: 10px;">050ms</span>
+        </div>
+      </div>
+    </div>
     <script src="main.js"></script>
     <script src="tile.js"></script>
     <script src="loadLevel.js"></script>

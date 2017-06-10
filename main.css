@@ -60,9 +60,20 @@ body {
 		flex-flow: row wrap;
 		justify-content: space-around;
 		align-items: space-around;
-		height: 400px;
-		width: 400px;
+		height: 440px;
+		width: 440px;
 	}
+  #keybindss {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 40px;
+    display: flex;
+		flex-flow: row wrap;
+		justify-content: space-around;
+		align-items: space-around;
+  }
 	.keybinds {
 		position: relative;
 		display: flex;
@@ -121,13 +132,13 @@ body {
 		background-color: rgba(0,0,0,0.6);
   }
 #keybinds img {
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   position: absolute;
   right: 0px;
   top: 0px;
   z-index: 10;
-  border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 5px;
   background-color: #00FF00;
   transition: background-color 0.5s;
 }
@@ -147,4 +158,24 @@ body {
 canvas {
   height: 100%;
   width: 100%;
+}
+#speed {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  height: 40px;
+  width: 440px;
+  background-color: #F0F0F0;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+#speed span {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+#speed input {
+  position: relative;
+  top: 2px;
 }

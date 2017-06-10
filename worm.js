@@ -104,7 +104,7 @@ function worm(x,y,d,c,i) {
       keybinder.bindings[keybinder.worms[i].right] = function() {this.setDir(2)}.bind(this);
       keybinder.bindings[keybinder.worms[i].down] = function() {this.setDir(3)}.bind(this);
       keybinder.bindings[keybinder.worms[i].left] = function() {this.setDir(4)}.bind(this);
-      this.interval = setInterval(function() {this.update()}.bind(this), 50);
+      this.interval = setInterval(function() {this.update()}.bind(this), keybinder.updateSpeed);
     } else {
       keybinder.bindings[keybinder.worms[i].up] = null;
       keybinder.bindings[keybinder.worms[i].right] = null;
