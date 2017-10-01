@@ -165,6 +165,7 @@ function keybinder() {
     document.getElementById("speed").children[1].value = this.updateSpeed;
     document.getElementById("curSpeed").innerHTML = (this.updateSpeed.length == 1? "00" : this.updateSpeed.length == 2? "0" : "") + this.updateSpeed + "ms";
   }
+  this.getCookie();
 }
 
 var keybinder = new keybinder();
